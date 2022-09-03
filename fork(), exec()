@@ -1,0 +1,22 @@
+#include <sys/types.h> 
+#include <unistd.h> 
+#include <stdio.h> 
+int main() 
+{ 
+             pid_t pid; 
+             printf("Before fork() call\n"); 
+             pid = fork(); 
+
+             if (pid == 0) 
+                 printf("This is Child process. PID is %d\n", pid); 
+             else if (pid > 0) 
+                 printf("This is Parent process. PID is %d\n", pid); 
+             else 
+                 printf("fork() is failed\n"); 
+             return 0;
+}
+
+// fork() < --> exec() 
+// 프로세스를 추가적으로 생성할 지 혹은 덮어 쒸울건지를 생각해볼 필요가 있다.
+// fork() 한 이후에 pID를 리턴 받게 되는데, 이 떄 호출한 프로세스(parent)와 호출된 process(child_생성된 프로세스)간 pID가 서로 다르다. 자식으 경우에는 0을 부여받는다
+// wait() 유의하기
